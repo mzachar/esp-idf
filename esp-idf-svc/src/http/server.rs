@@ -1640,6 +1640,8 @@ pub mod ws {
                 user_ctx: Box::into_raw(Box::new(req_handler)) as *mut _,
                 handler: Some(EspHttpServer::handle_req),
                 is_websocket: true,
+                #[cfg(esp_idf_httpd_ws_post_handshake_cb_support)]
+                ws_post_handshake_cb: Some(EspHttpServer::handle_req),
                 // TODO: Expose as a parameter in future: handle_ws_control_frames: true,
                 ..Default::default()
             };
